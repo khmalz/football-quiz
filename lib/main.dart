@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_quiz/app/data/constant/color.dart';
 
 import 'package:get/get.dart';
 
@@ -10,6 +11,18 @@ void main() {
       title: "Application",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: primary),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(),
+          bodyMedium: TextStyle(),
+        ).apply(
+          bodyColor: textPrimary,
+          displayColor: textPrimary,
+        ),
+        useMaterial3: true,
+      ),
     ),
   );
 }

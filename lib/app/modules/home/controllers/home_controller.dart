@@ -1,23 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  final List<String> gender = ["Male", "Female", "Non-binary", "WTF"];
+  Rxn<String> selectedGender = Rxn<String>(null);
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void onClickRadioButton(value) {
+    selectedGender.value = value;
+
+    debugPrint(value);
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
