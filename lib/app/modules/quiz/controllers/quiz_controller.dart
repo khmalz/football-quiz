@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class QuizController extends GetxController {
   final List<String> gender = ["Male", "Female", "Non-binary", "WTF"];
   Rxn<String> selectedGender = Rxn<String>(null);
 

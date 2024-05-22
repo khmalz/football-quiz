@@ -4,10 +4,10 @@ import 'package:football_quiz/app/data/constant/color.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/home_controller.dart';
+import '../controllers/quiz_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+class QuizView extends GetView<QuizController> {
+  const QuizView({super.key});
 
   @override
   Widget build(BuildContext context) {

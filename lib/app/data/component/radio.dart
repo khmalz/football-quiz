@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
-import 'package:football_quiz/app/modules/home/controllers/home_controller.dart';
+import 'package:football_quiz/app/modules/quiz/controllers/quiz_controller.dart';
 import 'package:get/get.dart';
 
 class RadioWidget extends StatelessWidget {
@@ -10,7 +10,7 @@ class RadioWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController controller = Get.find<HomeController>();
+    final QuizController controller = Get.find<QuizController>();
 
     return Obx(
       () => Card(
