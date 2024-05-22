@@ -9,3 +9,4 @@ const textPrimary = Colors.black;
 const textSecondary = Colors.white;
 
 const lighterPrimary = Color.fromARGB(255, 159, 196, 197);
+const lighterGray = Color.fromARGB(255, 239, 239, 242);
