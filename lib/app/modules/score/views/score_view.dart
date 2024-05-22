@@ -142,130 +142,128 @@ class ScoreView extends GetView<ScoreController> {
               ),
             ),
           ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              child: const Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.amber,
-                            minRadius: 25,
-                            maxRadius: 30,
-                            child: Icon(
-                              Icons.refresh,
-                              color: textSecondary,
-                              size: 35,
-                            ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            child: const Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.amber,
+                          minRadius: 25,
+                          maxRadius: 30,
+                          child: Icon(
+                            Icons.refresh,
+                            color: textSecondary,
+                            size: 35,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Play Again',
+                          style: TextStyle(fontSize: 18),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.brown,
+                          minRadius: 25,
+                          maxRadius: 30,
+                          child: Icon(
+                            Icons.remove_red_eye,
+                            color: textSecondary,
+                            size: 35,
                           ),
-                          Text(
-                            'Play Again',
-                            style: TextStyle(fontSize: 18),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.brown,
-                            minRadius: 25,
-                            maxRadius: 30,
-                            child: Icon(
-                              Icons.remove_red_eye,
-                              color: textSecondary,
-                              size: 35,
-                            ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Review Answer',
+                          style: TextStyle(fontSize: 18),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          minRadius: 25,
+                          maxRadius: 30,
+                          child: Icon(
+                            Icons.skip_next,
+                            color: textSecondary,
+                            size: 35,
                           ),
-                          SizedBox(
-                            height: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Next Level',
+                          style: TextStyle(fontSize: 18),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.indigo,
+                          minRadius: 25,
+                          maxRadius: 30,
+                          child: Icon(
+                            Icons.home,
+                            color: textSecondary,
+                            size: 35,
                           ),
-                          Text(
-                            'Review Answer',
-                            style: TextStyle(fontSize: 18),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.blue,
-                            minRadius: 25,
-                            maxRadius: 30,
-                            child: Icon(
-                              Icons.skip_next,
-                              color: textSecondary,
-                              size: 35,
-                            ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Home',
+                          style: TextStyle(fontSize: 18),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.deepOrange,
+                          minRadius: 25,
+                          maxRadius: 30,
+                          child: Icon(
+                            Icons.leaderboard,
+                            color: textSecondary,
+                            size: 35,
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Next Level',
-                            style: TextStyle(fontSize: 18),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.indigo,
-                            minRadius: 25,
-                            maxRadius: 30,
-                            child: Icon(
-                              Icons.home,
-                              color: textSecondary,
-                              size: 35,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Home',
-                            style: TextStyle(fontSize: 18),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.deepOrange,
-                            minRadius: 25,
-                            maxRadius: 30,
-                            child: Icon(
-                              Icons.leaderboard,
-                              color: textSecondary,
-                              size: 35,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Leaderboard',
-                            style: TextStyle(fontSize: 18),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Leaderboard',
+                          style: TextStyle(fontSize: 18),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           )
         ],
