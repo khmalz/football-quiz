@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
+import 'package:football_quiz/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import '../controllers/category_controller.dart';
@@ -108,6 +109,9 @@ class CategoryView extends GetView<CategoryController> {
                                       elevation: 3,
                                       color: textSecondary,
                                       child: ListTile(
+                                        onTap: () {
+                                          Get.toNamed(Routes.LEVEL);
+                                        },
                                         contentPadding:
                                             const EdgeInsets.symmetric(
                                                 horizontal: 20, vertical: 10),
@@ -161,6 +165,9 @@ class CategoryView extends GetView<CategoryController> {
                         elevation: 3,
                         color: textSecondary,
                         child: ListTile(
+                          onTap: () {
+                            Get.toNamed(Routes.LEVEL);
+                          },
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),
                           leading: FaIcon(category['icon'],

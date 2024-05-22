@@ -6,6 +6,7 @@ abstract class Routes {
   static const QUIZ = _Paths.QUIZ;
   static const SCORE = _Paths.SCORE;
   static const CATEGORY = _Paths.CATEGORY;
+  static const LEVEL = _Paths.LEVEL;
 }
 
 abstract class _Paths {
@@ -13,4 +14,5 @@ abstract class _Paths {
   static const QUIZ = '/quiz';
   static const SCORE = '/score';
   static const CATEGORY = '/category';
+  static const LEVEL = '/level';
 }
