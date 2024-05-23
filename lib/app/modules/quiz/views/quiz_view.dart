@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/component/radio.dart';
-import 'package:football_quiz/app/data/constant/color.dart';
+import 'package:football_quiz/app/data/constant/questions.dart';
 
 import 'package:get/get.dart';
 
@@ -35,55 +35,94 @@ class QuizView extends GetView<QuizController> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            if (controller.currentIndex.value <
+                championsLeagueQuestions.length - 1) {
+              if (controller.championsLeagueAnswer.length <=
+                      controller.currentIndex.value ||
+                  controller
+                      .championsLeagueAnswer[controller.currentIndex.value]
+                      .isEmpty) {
+                controller.skipQuestion(controller.currentIndex.value);
+              }
+
+              controller.nextPage(championsLeagueQuestions.length);
+            } else {
+              controller.calculateScore();
+
+              debugPrint(controller.point.value.toString());
+            }
+          },
           style: ElevatedButton.styleFrom(
-            backgroundColor: third,
+            backgroundColor: Colors.blue, // Ganti dengan warna third
             minimumSize: const Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
           ),
-          child: const Text('Skip',
-              style: TextStyle(color: textPrimary, fontSize: 16)),
+          child: Obx(
+            () => Text(
+              (controller.currentIndex < championsLeagueQuestions.length - 1)
+                  ? 'Skip'
+                  : 'Selesai',
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: ListView(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-            width: double.infinity,
-            child: Card(
-              color: textSecondary,
-              elevation: 10,
-              child: Padding(
+      body: PageView.builder(
+        controller: controller.pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: championsLeagueQuestions.length,
+        itemBuilder: (context, index) {
+          final question = championsLeagueQuestions[index];
+
+          return ListView(
+            children: [
+              Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-                child: Text(
-                  'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        letterSpacing: 1,
-                        wordSpacing: 1.4,
-                      ),
+                    const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+                width: double.infinity,
+                child: Card(
+                  color: Colors.grey[200],
+                  elevation: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 30),
+                    child: Text(
+                      question['question'],
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            letterSpacing: 1,
+                            wordSpacing: 1.4,
+                          ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: Column(
-              children: [
-                RadioWidget(text: "Male", index: controller.gender[0]),
-                const SizedBox(height: 10),
-                RadioWidget(text: "Female", index: controller.gender[1]),
-                const SizedBox(height: 10),
-                RadioWidget(text: "Non-binary", index: controller.gender[2]),
-                const SizedBox(height: 10),
-                RadioWidget(text: "WTF", index: controller.gender[3]),
-              ],
-            ),
-          )
-        ],
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: championsLeagueQuestions[index]['options'].length,
+                  itemBuilder: (context, optionIndex) {
+                    final option =
+                        championsLeagueQuestions[index]['options'][optionIndex];
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RadioWidget(
+                            text: option, option: option, indexQuestion: index),
+                        const SizedBox(height: 10),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
