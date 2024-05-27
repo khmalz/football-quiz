@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/component/radio.dart';
-import 'package:football_quiz/app/data/constant/questions.dart';
 
 import 'package:get/get.dart';
 
@@ -37,7 +36,7 @@ class QuizView extends GetView<QuizController> {
         child: ElevatedButton(
           onPressed: () {
             if (controller.currentIndex.value <
-                championsLeagueQuestions.length - 1) {
+                controller.championsLeagueQuestions.length - 1) {
               if (controller.championsLeagueAnswer.length <=
                       controller.currentIndex.value ||
                   controller
@@ -46,7 +45,7 @@ class QuizView extends GetView<QuizController> {
                 controller.skipQuestion(controller.currentIndex.value);
               }
 
-              controller.nextPage(championsLeagueQuestions.length);
+              controller.nextPage(controller.championsLeagueQuestions.length);
             } else {
               controller.calculateScore();
 
@@ -62,7 +61,7 @@ class QuizView extends GetView<QuizController> {
           ),
           child: Obx(
             () => Text(
-              (controller.currentIndex < championsLeagueQuestions.length - 1)
+              (controller.currentIndex < controller.championsLeagueQuestions.length - 1)
                   ? 'Skip'
                   : 'Selesai',
               style: const TextStyle(color: Colors.white, fontSize: 16),
@@ -74,9 +73,9 @@ class QuizView extends GetView<QuizController> {
       body: PageView.builder(
         controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: championsLeagueQuestions.length,
+        itemCount: controller.championsLeagueQuestions.length,
         itemBuilder: (context, index) {
-          final question = championsLeagueQuestions[index];
+          final question = controller.championsLeagueQuestions[index];
 
           return ListView(
             children: [
@@ -91,7 +90,7 @@ class QuizView extends GetView<QuizController> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15, vertical: 30),
                     child: Text(
-                      question['question'],
+                      question.question!,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             letterSpacing: 1,
                             wordSpacing: 1.4,
@@ -105,10 +104,10 @@ class QuizView extends GetView<QuizController> {
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: championsLeagueQuestions[index]['options'].length,
+                  itemCount: controller.championsLeagueQuestions[index].options!.length,
                   itemBuilder: (context, optionIndex) {
                     final option =
-                        championsLeagueQuestions[index]['options'][optionIndex];
+                        controller.championsLeagueQuestions[index].options![optionIndex];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

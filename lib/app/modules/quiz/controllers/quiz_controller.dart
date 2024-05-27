@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:football_quiz/app/data/constant/questions.dart';
+import 'package:football_quiz/app/modules/quiz/providers/question_provider.dart';
+import 'package:football_quiz/app/modules/quiz/question_model.dart';
 import 'package:get/get.dart';
 
 class QuizController extends GetxController {
+  final RxList<Question> championsLeagueQuestions = <Question>[].obs;
+
   RxList<RxMap<String, dynamic>> championsLeagueAnswer =
       <RxMap<String, dynamic>>[].obs;
+
+  QuestionProvider questionProvider = QuestionProvider();
+
+  Future<void> getQuestions() async {
+    var models = await questionProvider.getQuestion();
+
+    if (models.isNotEmpty) {
+      championsLeagueQuestions.value = models;
+    }
+  }
 
   void onClickRadioButton(int indexQuestion, value) {
     if (championsLeagueAnswer.length > indexQuestion) {
@@ -51,7 +64,7 @@ class QuizController extends GetxController {
 
     for (var i = 0; i < totalQuestions; i++) {
       var userAnswer = championsLeagueAnswer[i]['selectedAnswer'];
-      var correctAnswer = championsLeagueQuestions[i]['answer'];
+      var correctAnswer = championsLeagueQuestions[i].answer;
 
       if (userAnswer == correctAnswer) {
         correct++;
