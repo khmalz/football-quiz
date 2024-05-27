@@ -4,6 +4,8 @@ import 'package:football_quiz/app/modules/quiz/question_model.dart';
 import 'package:get/get.dart';
 
 class QuizController extends GetxController {
+  String category = Get.parameters['category'].toString();
+
   final RxList<Question> championsLeagueQuestions = <Question>[].obs;
 
   RxList<RxMap<String, dynamic>> championsLeagueAnswer =
@@ -12,9 +14,11 @@ class QuizController extends GetxController {
   QuestionProvider questionProvider = QuestionProvider();
 
   Future<void> getQuestions() async {
-    var models = await questionProvider.getQuestion();
+    var models = await questionProvider.getQuestion(category);
 
     if (models.isNotEmpty) {
+      debugPrint(models.toString());
+
       championsLeagueQuestions.value = models;
     }
   }
@@ -61,6 +65,10 @@ class QuizController extends GetxController {
 
     int totalQuestions = championsLeagueQuestions.length;
     double pointPerQuestion = maxScore / totalQuestions;
+
+    while (championsLeagueAnswer.length < totalQuestions) {
+      championsLeagueAnswer.add({'selectedAnswer': ""}.obs);
+    }
 
     for (var i = 0; i < totalQuestions; i++) {
       var userAnswer = championsLeagueAnswer[i]['selectedAnswer'];

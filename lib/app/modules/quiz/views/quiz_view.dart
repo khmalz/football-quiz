@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/component/radio.dart';
+import 'package:football_quiz/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
 
@@ -44,12 +45,11 @@ class QuizView extends GetView<QuizController> {
                       .isEmpty) {
                 controller.skipQuestion(controller.currentIndex.value);
               }
-
               controller.nextPage(controller.championsLeagueQuestions.length);
             } else {
               controller.calculateScore();
 
-              debugPrint(controller.point.value.toString());
+              Get.offAllNamed(Routes.CATEGORY);
             }
           },
           style: ElevatedButton.styleFrom(
@@ -61,7 +61,8 @@ class QuizView extends GetView<QuizController> {
           ),
           child: Obx(
             () => Text(
-              (controller.currentIndex < controller.championsLeagueQuestions.length - 1)
+              (controller.currentIndex <
+                      controller.championsLeagueQuestions.length - 1)
                   ? 'Skip'
                   : 'Selesai',
               style: const TextStyle(color: Colors.white, fontSize: 16),
@@ -104,10 +105,11 @@ class QuizView extends GetView<QuizController> {
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: controller.championsLeagueQuestions[index].options!.length,
+                  itemCount: controller
+                      .championsLeagueQuestions[index].options!.length,
                   itemBuilder: (context, optionIndex) {
-                    final option =
-                        controller.championsLeagueQuestions[index].options![optionIndex];
+                    final option = controller
+                        .championsLeagueQuestions[index].options![optionIndex];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

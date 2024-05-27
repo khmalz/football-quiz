@@ -1,7 +1,10 @@
-import 'dart:math';
+// ignore_for_file: dead_code
+
+// import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
+import 'package:football_quiz/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
 
@@ -41,19 +44,26 @@ class LevelView extends GetView<LevelController> {
           crossAxisSpacing: 16.0,
         ),
         itemBuilder: (context, index) {
-          bool isUnlocked = Random().nextInt(2) == 1;
+          bool isLocked = false;
 
           return GestureDetector(
             onTap: () {
-              if (isUnlocked) {
-                // Navigasi ke level yang dipilih
+              if (!isLocked) {
+                if (index == 1) {
+                  Get.toNamed(Routes.QUIZ, parameters: {
+                    'level': index.toString(),
+                    'category': controller.category
+                  });
+                } else {
+                  debugPrint("click");
+                }
               } else {
                 // Tampilkan pesan bahwa level masih terkunci
               }
             },
             child: Container(
               decoration: BoxDecoration(
-                color: isUnlocked
+                color: isLocked
                     ? Colors.white // Jika level terbuka
                     : Theme.of(context)
                         .colorScheme
@@ -66,10 +76,10 @@ class LevelView extends GetView<LevelController> {
                   Text(
                     '${++index}',
                     style: TextStyle(
-                      color: isUnlocked ? Colors.black : Colors.white,
+                      color: isLocked ? Colors.black : Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 24.0,
-                      decoration: isUnlocked
+                      decoration: isLocked
                           ? TextDecoration.lineThrough
                           : TextDecoration.none,
                       decorationColor: Colors.black,
@@ -80,10 +90,10 @@ class LevelView extends GetView<LevelController> {
                   Text(
                     'Level',
                     style: TextStyle(
-                      color: isUnlocked ? Colors.black : Colors.white,
+                      color: isLocked ? Colors.black : Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      decoration: isUnlocked
+                      decoration: isLocked
                           ? TextDecoration.lineThrough
                           : TextDecoration.none,
                       decorationColor: Colors.black,

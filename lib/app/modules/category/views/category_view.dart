@@ -110,7 +110,12 @@ class CategoryView extends GetView<CategoryController> {
                                       color: textSecondary,
                                       child: ListTile(
                                         onTap: () {
-                                          Get.toNamed(Routes.LEVEL);
+                                          Get.toNamed(
+                                            Routes.LEVEL,
+                                            parameters: {
+                                              "category": category["league"]
+                                            },
+                                          );
                                         },
                                         contentPadding:
                                             const EdgeInsets.symmetric(
@@ -166,7 +171,10 @@ class CategoryView extends GetView<CategoryController> {
                         color: textSecondary,
                         child: ListTile(
                           onTap: () {
-                            Get.toNamed(Routes.LEVEL);
+                            Get.toNamed(
+                              Routes.LEVEL,
+                              parameters: {"category": category["league"]},
+                            );
                           },
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),
