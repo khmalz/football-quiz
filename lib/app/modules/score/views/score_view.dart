@@ -1,7 +1,7 @@
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
-import 'package:football_quiz/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
 
@@ -177,7 +177,7 @@ class ScoreView extends GetView<ScoreController> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: controller.reviewAnswer,
                       child: const Column(
                         children: [
                           CircleAvatar(
@@ -201,7 +201,16 @@ class ScoreView extends GetView<ScoreController> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        ArtSweetAlert.show(
+                          context: context,
+                          artDialogArgs: ArtDialogArgs(
+                            type: ArtSweetAlertType.danger,
+                            title: "Oops...",
+                            text: "This feature is still in development",
+                          ),
+                        );
+                      },
                       child: const Column(
                         children: [
                           CircleAvatar(
@@ -231,9 +240,7 @@ class ScoreView extends GetView<ScoreController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        Get.offAllNamed(Routes.CATEGORY);
-                      },
+                      onTap: controller.toHome,
                       child: const Column(
                         children: [
                           CircleAvatar(
@@ -257,7 +264,16 @@ class ScoreView extends GetView<ScoreController> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        ArtSweetAlert.show(
+                          context: context,
+                          artDialogArgs: ArtDialogArgs(
+                            type: ArtSweetAlertType.danger,
+                            title: "Oops...",
+                            text: "This feature is still in development",
+                          ),
+                        );
+                      },
                       child: const Column(
                         children: [
                           CircleAvatar(

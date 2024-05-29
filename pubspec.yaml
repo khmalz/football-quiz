@@ -1,5 +1,5 @@
 name: football_quiz
-version: 1.0.0+1
+version: 2.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -13,6 +13,7 @@ dependencies:
   confirm_dialog: 1.0.3
   art_sweetalert: 0.0.5
   timer_count_down: 2.2.2
+  get_storage: 2.1.1
   flutter: 
     sdk: flutter
 

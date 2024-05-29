@@ -1,4 +1,4 @@
-List<Map<String, dynamic>> championsLeagueQuestions = [
+List<Map<String, dynamic>> championsleagueQuestions = [
   {
     "question": "Which team won the UEFA Champions League in 2023?",
     "options": ["Manchester City", "Real Madrid", "Bayern Munich", "Liverpool"],
@@ -42,7 +42,7 @@ List<Map<String, dynamic>> championsLeagueQuestions = [
   }
 ];
 
-List<Map<String, dynamic>> premierLeagueQuestions = [
+List<Map<String, dynamic>> premierleagueQuestions = [
   {
     "question": "Which team won the Premier League in 2023?",
     "options": ["Manchester City", "Arsenal", "Manchester United", "Liverpool"],
@@ -85,7 +85,7 @@ List<Map<String, dynamic>> premierLeagueQuestions = [
   }
 ];
 
-List<Map<String, dynamic>> laLigaQuestions = [
+List<Map<String, dynamic>> laligaQuestions = [
   {
     "question": "Which team won the La Liga in 2023?",
     "options": ["Real Madrid", "Barcelona", "Atlético Madrid", "Sevilla"],

@@ -3,6 +3,7 @@ import 'package:football_quiz/app/modules/quiz/providers/question_provider.dart'
 import 'package:football_quiz/app/modules/quiz/question_model.dart';
 import 'package:football_quiz/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class QuizController extends GetxController {
   String level = Get.parameters['level'].toString();
@@ -31,6 +32,8 @@ class QuizController extends GetxController {
 
       questions.value = models;
       totalQuestions.value = models.length;
+
+      addQuestionToCache(models);
     }
   }
 
@@ -92,14 +95,31 @@ class QuizController extends GetxController {
     int completionQuestion = countCompletionQuestion();
     int wrong = completionQuestion - correct;
 
-    Get.toNamed(Routes.SCORE, arguments: {
+    Get.offAllNamed(Routes.SCORE, arguments: {
       "level": level,
       "category": category,
+      "answers": answers,
       "correct": correct,
       "wrong": wrong,
       "point": point.value,
       "total": totalQuestions,
       "completion": completionQuestion,
     });
+  }
+
+  void addQuestionToCache(List<Question> questions) {
+    final box = GetStorage();
+
+    List<Map<String, dynamic>> questionsJson =
+        questions.map((q) => q.toJson()).toList();
+
+    Map<String, dynamic> dataToSave = {
+      'proses': 'review',
+      'category': category,
+      'level': level,
+      'data': questionsJson,
+    };
+
+    box.write('questionsCache', dataToSave);
   }
 }

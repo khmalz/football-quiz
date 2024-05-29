@@ -1,11 +1,13 @@
-import 'package:football_quiz/app/modules/quiz/views/introdution_quiz_view.dart';
 import 'package:get/get.dart';
 
+import '../modules/answer_review/bindings/answer_review_binding.dart';
+import '../modules/answer_review/views/answer_review_view.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
 import '../modules/level/bindings/level_binding.dart';
 import '../modules/level/views/level_view.dart';
 import '../modules/quiz/bindings/quiz_binding.dart';
+import '../modules/quiz/views/introdution_quiz_view.dart';
 import '../modules/score/bindings/score_binding.dart';
 import '../modules/score/views/score_view.dart';
 
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.LEVEL,
       page: () => const LevelView(),
       binding: LevelBinding(),
+    ),
+    GetPage(
+      name: _Paths.ANSWER_REVIEW,
+      page: () => const AnswerReviewView(),
+      binding: AnswerReviewBinding(),
     ),
   ];
 }
