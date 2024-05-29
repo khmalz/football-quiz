@@ -1,6 +1,7 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
+import 'package:football_quiz/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
 
@@ -44,7 +45,7 @@ class ScoreView extends GetView<ScoreController> {
                         ),
                       ),
                       Text(
-                        '100 Pt',
+                        '${controller.point} Pt',
                         style: TextStyle(
                           fontSize: 28,
                           color: Theme.of(context).colorScheme.primary,
@@ -64,21 +65,22 @@ class ScoreView extends GetView<ScoreController> {
                 borderRadius: BorderRadius.circular(20),
               ),
               color: Theme.of(context).colorScheme.primary,
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       children: [
                         Text(
-                          '15/15',
-                          style: TextStyle(
+                          '${controller.completion}/${controller.total}',
+                          style: const TextStyle(
                             fontSize: 18,
                             color: textSecondary,
                           ),
                         ),
-                        Text(
+                        const Text(
                           'Completion',
                           style: TextStyle(
                             fontSize: 18,
@@ -87,7 +89,7 @@ class ScoreView extends GetView<ScoreController> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                       child: VerticalDivider(
                         color: textSecondary,
@@ -97,13 +99,13 @@ class ScoreView extends GetView<ScoreController> {
                     Column(
                       children: [
                         Text(
-                          '15',
-                          style: TextStyle(
+                          "${controller.correct}",
+                          style: const TextStyle(
                             fontSize: 18,
                             color: textSecondary,
                           ),
                         ),
-                        Text(
+                        const Text(
                           'Correct',
                           style: TextStyle(
                             fontSize: 18,
@@ -112,7 +114,7 @@ class ScoreView extends GetView<ScoreController> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                       child: VerticalDivider(
                         color: textSecondary,
@@ -122,13 +124,13 @@ class ScoreView extends GetView<ScoreController> {
                     Column(
                       children: [
                         Text(
-                          '0',
-                          style: TextStyle(
+                          "${controller.wrong}",
+                          style: const TextStyle(
                             fontSize: 18,
                             color: textSecondary,
                           ),
                         ),
-                        Text(
+                        const Text(
                           'Wrong',
                           style: TextStyle(
                             fontSize: 18,
@@ -145,121 +147,138 @@ class ScoreView extends GetView<ScoreController> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            child: const Column(
+            child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.amber,
-                          minRadius: 25,
-                          maxRadius: 30,
-                          child: Icon(
-                            Icons.refresh,
-                            color: textSecondary,
-                            size: 35,
+                    GestureDetector(
+                      onTap: controller.playAgain,
+                      child: const Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.amber,
+                            minRadius: 25,
+                            maxRadius: 30,
+                            child: Icon(
+                              Icons.refresh,
+                              color: textSecondary,
+                              size: 35,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Play Again',
-                          style: TextStyle(fontSize: 18),
-                        )
-                      ],
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Play Again',
+                            style: TextStyle(fontSize: 18),
+                          )
+                        ],
+                      ),
                     ),
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.brown,
-                          minRadius: 25,
-                          maxRadius: 30,
-                          child: Icon(
-                            Icons.remove_red_eye,
-                            color: textSecondary,
-                            size: 35,
+                    GestureDetector(
+                      onTap: () {},
+                      child: const Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.brown,
+                            minRadius: 25,
+                            maxRadius: 30,
+                            child: Icon(
+                              Icons.remove_red_eye,
+                              color: textSecondary,
+                              size: 35,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Review Answer',
-                          style: TextStyle(fontSize: 18),
-                        )
-                      ],
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Review Answer',
+                            style: TextStyle(fontSize: 18),
+                          )
+                        ],
+                      ),
                     ),
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.blue,
-                          minRadius: 25,
-                          maxRadius: 30,
-                          child: Icon(
-                            Icons.skip_next,
-                            color: textSecondary,
-                            size: 35,
+                    GestureDetector(
+                      onTap: () {},
+                      child: const Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.blue,
+                            minRadius: 25,
+                            maxRadius: 30,
+                            child: Icon(
+                              Icons.skip_next,
+                              color: textSecondary,
+                              size: 35,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Next Level',
-                          style: TextStyle(fontSize: 18),
-                        )
-                      ],
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Next Level',
+                            style: TextStyle(fontSize: 18),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.indigo,
-                          minRadius: 25,
-                          maxRadius: 30,
-                          child: Icon(
-                            Icons.home,
-                            color: textSecondary,
-                            size: 35,
+                    GestureDetector(
+                      onTap: () {
+                        Get.offAllNamed(Routes.CATEGORY);
+                      },
+                      child: const Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.indigo,
+                            minRadius: 25,
+                            maxRadius: 30,
+                            child: Icon(
+                              Icons.home,
+                              color: textSecondary,
+                              size: 35,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Home',
-                          style: TextStyle(fontSize: 18),
-                        )
-                      ],
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Home',
+                            style: TextStyle(fontSize: 18),
+                          )
+                        ],
+                      ),
                     ),
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.deepOrange,
-                          minRadius: 25,
-                          maxRadius: 30,
-                          child: Icon(
-                            Icons.leaderboard,
-                            color: textSecondary,
-                            size: 35,
+                    GestureDetector(
+                      onTap: () {},
+                      child: const Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.deepOrange,
+                            minRadius: 25,
+                            maxRadius: 30,
+                            child: Icon(
+                              Icons.leaderboard,
+                              color: textSecondary,
+                              size: 35,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Leaderboard',
-                          style: TextStyle(fontSize: 18),
-                        )
-                      ],
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Leaderboard',
+                            style: TextStyle(fontSize: 18),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),

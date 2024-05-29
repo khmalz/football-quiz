@@ -25,19 +25,16 @@ class RadioWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        color: (controller.championsLeagueAnswer.isNotEmpty &&
-                indexQuestion < controller.championsLeagueAnswer.length &&
-                controller.championsLeagueAnswer[indexQuestion]
-                        ['selectedAnswer'] ==
-                    option)
+        color: (controller.answers.isNotEmpty &&
+                indexQuestion < controller.answers.length &&
+                controller.answers[indexQuestion]['selectedAnswer'] == option)
             ? third
             : textSecondary,
         child: RadioListTile(
           value: option,
-          groupValue: (controller.championsLeagueAnswer.isNotEmpty &&
-                  indexQuestion < controller.championsLeagueAnswer.length)
-              ? controller.championsLeagueAnswer[indexQuestion]
-                  ['selectedAnswer']
+          groupValue: (controller.answers.isNotEmpty &&
+                  indexQuestion < controller.answers.length)
+              ? controller.answers[indexQuestion]['selectedAnswer']
               : null,
           onChanged: (value) =>
               controller.onClickRadioButton(indexQuestion, value),

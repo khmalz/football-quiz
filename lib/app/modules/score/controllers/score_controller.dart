@@ -1,23 +1,19 @@
+import 'package:football_quiz/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class ScoreController extends GetxController {
-  //TODO: Implement ScoreController
+  var level = Get.arguments["level"];
+  var category = Get.arguments["category"];
+  var correct = Get.arguments["correct"];
+  var wrong = Get.arguments["wrong"];
+  var point = Get.arguments["point"];
+  var total = Get.arguments["total"];
+  var completion = Get.arguments["completion"];
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void playAgain() {
+    Get.offAllNamed(Routes.QUIZ, parameters: {
+      'level': level,
+      'category': category,
+    });
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

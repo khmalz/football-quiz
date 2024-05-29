@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/modules/quiz/providers/question_provider.dart';
 import 'package:football_quiz/app/modules/quiz/question_model.dart';
+import 'package:football_quiz/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class QuizController extends GetxController {
+  String level = Get.parameters['level'].toString();
   String category = Get.parameters['category'].toString();
 
-  final RxList<Question> championsLeagueQuestions = <Question>[].obs;
+  final RxList<Question> questions = <Question>[].obs;
 
-  RxList<RxMap<String, dynamic>> championsLeagueAnswer =
-      <RxMap<String, dynamic>>[].obs;
+  RxList<RxMap<String, dynamic>> answers = <RxMap<String, dynamic>>[].obs;
 
   QuestionProvider questionProvider = QuestionProvider();
+
+  int countCompletionQuestion() {
+    return answers
+        .where((answer) =>
+            answer['selectedAnswer'] != null &&
+            answer['selectedAnswer'].toString().isNotEmpty)
+        .length;
+  }
 
   Future<void> getQuestions() async {
     var models = await questionProvider.getQuestion(category);
@@ -19,28 +28,28 @@ class QuizController extends GetxController {
     if (models.isNotEmpty) {
       debugPrint(models.toString());
 
-      championsLeagueQuestions.value = models;
+      questions.value = models;
     }
   }
 
   void onClickRadioButton(int indexQuestion, value) {
-    if (championsLeagueAnswer.length > indexQuestion) {
-      championsLeagueAnswer[indexQuestion]['selectedAnswer'] = value;
+    if (answers.length > indexQuestion) {
+      answers[indexQuestion]['selectedAnswer'] = value;
     } else {
-      championsLeagueAnswer.add({'selectedAnswer': value}.obs);
+      answers.add({'selectedAnswer': value}.obs);
     }
 
-    debugPrint(championsLeagueAnswer.toString());
+    debugPrint(answers.toString());
   }
 
   void skipQuestion(int indexQuestion) {
-    if (championsLeagueAnswer.length > indexQuestion) {
-      championsLeagueAnswer[indexQuestion]['selectedAnswer'] = "";
+    if (answers.length > indexQuestion) {
+      answers[indexQuestion]['selectedAnswer'] = "";
     } else {
-      championsLeagueAnswer.add({'selectedAnswer': ""}.obs);
+      answers.add({'selectedAnswer': ""}.obs);
     }
 
-    debugPrint(championsLeagueAnswer.toString());
+    debugPrint(answers.toString());
   }
 
   RxInt currentIndex = 0.obs;
@@ -63,22 +72,33 @@ class QuizController extends GetxController {
     int correct = 0;
     int maxScore = 100;
 
-    int totalQuestions = championsLeagueQuestions.length;
+    int totalQuestions = questions.length;
     double pointPerQuestion = maxScore / totalQuestions;
 
-    while (championsLeagueAnswer.length < totalQuestions) {
-      championsLeagueAnswer.add({'selectedAnswer': ""}.obs);
+    while (answers.length < totalQuestions) {
+      answers.add({'selectedAnswer': ""}.obs);
     }
 
     for (var i = 0; i < totalQuestions; i++) {
-      var userAnswer = championsLeagueAnswer[i]['selectedAnswer'];
-      var correctAnswer = championsLeagueQuestions[i].answer;
+      var userAnswer = answers[i]['selectedAnswer'];
+      var correctAnswer = questions[i].answer;
 
-      if (userAnswer == correctAnswer) {
-        correct++;
-      }
+      if (userAnswer == correctAnswer) correct++;
     }
 
     point.value = (correct * pointPerQuestion).round();
+
+    int completionQuestion = countCompletionQuestion();
+    int wrong = completionQuestion - correct;
+
+    Get.toNamed(Routes.SCORE, arguments: {
+      "level": level,
+      "category": category,
+      "correct": correct,
+      "wrong": wrong,
+      "point": point.value,
+      "total": totalQuestions,
+      "completion": completionQuestion,
+    });
   }
 }

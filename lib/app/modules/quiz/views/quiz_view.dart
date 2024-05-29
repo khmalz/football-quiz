@@ -1,6 +1,6 @@
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/component/radio.dart';
-import 'package:football_quiz/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
 
@@ -35,21 +35,26 @@ class QuizView extends GetView<QuizController> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             if (controller.currentIndex.value <
-                controller.championsLeagueQuestions.length - 1) {
-              if (controller.championsLeagueAnswer.length <=
-                      controller.currentIndex.value ||
-                  controller
-                      .championsLeagueAnswer[controller.currentIndex.value]
-                      .isEmpty) {
+                controller.questions.length - 1) {
+              if (controller.answers.length <= controller.currentIndex.value ||
+                  controller.answers[controller.currentIndex.value].isEmpty) {
                 controller.skipQuestion(controller.currentIndex.value);
               }
-              controller.nextPage(controller.championsLeagueQuestions.length);
+              controller.nextPage(controller.questions.length);
             } else {
-              controller.calculateScore();
-
-              Get.offAllNamed(Routes.CATEGORY);
+              if (await confirm(
+                context,
+                title: const Text('Confirm'),
+                content: const Text('Would you like to submit?'),
+                textOK: const Text('Yes'),
+                textCancel: const Text('No'),
+              )) {
+                controller.calculateScore();
+              } else {
+                debugPrint("pressed cancel");
+              }
             }
           },
           style: ElevatedButton.styleFrom(
@@ -61,8 +66,7 @@ class QuizView extends GetView<QuizController> {
           ),
           child: Obx(
             () => Text(
-              (controller.currentIndex <
-                      controller.championsLeagueQuestions.length - 1)
+              (controller.currentIndex < controller.questions.length - 1)
                   ? 'Skip'
                   : 'Selesai',
               style: const TextStyle(color: Colors.white, fontSize: 16),
@@ -74,9 +78,9 @@ class QuizView extends GetView<QuizController> {
       body: PageView.builder(
         controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: controller.championsLeagueQuestions.length,
+        itemCount: controller.questions.length,
         itemBuilder: (context, index) {
-          final question = controller.championsLeagueQuestions[index];
+          final question = controller.questions[index];
 
           return ListView(
             children: [
@@ -105,11 +109,10 @@ class QuizView extends GetView<QuizController> {
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: controller
-                      .championsLeagueQuestions[index].options!.length,
+                  itemCount: controller.questions[index].options!.length,
                   itemBuilder: (context, optionIndex) {
-                    final option = controller
-                        .championsLeagueQuestions[index].options![optionIndex];
+                    final option =
+                        controller.questions[index].options![optionIndex];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
