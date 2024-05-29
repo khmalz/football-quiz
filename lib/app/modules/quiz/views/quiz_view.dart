@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/component/radio.dart';
 
 import 'package:get/get.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
 import '../controllers/quiz_controller.dart';
 
@@ -14,17 +15,35 @@ class QuizView extends GetView<QuizController> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                Icon(Icons.timelapse_sharp),
-                SizedBox(width: 10),
-                Text('2:17'),
+                const Icon(Icons.timelapse_sharp),
+                const SizedBox(width: 10),
+                Countdown(
+                  seconds: 60,
+                  build: (BuildContext context, double time) =>
+                      Text(time.toInt().toString()),
+                  interval: const Duration(milliseconds: 1000),
+                  onFinished: () async {
+                    Get.defaultDialog(
+                      title: "Warning",
+                      middleText: "Timer is done!",
+                    );
+
+                    await Future.delayed(const Duration(seconds: 2));
+
+                    controller.calculateScore();
+                  },
+                )
               ],
             ),
-            Text('7/10'),
+            Obx(
+              () => Text(
+                  "${controller.currentIndex.value + 1}/${controller.totalQuestions}"),
+            ),
           ],
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -52,13 +71,11 @@ class QuizView extends GetView<QuizController> {
                 textCancel: const Text('No'),
               )) {
                 controller.calculateScore();
-              } else {
-                // debugPrint("pressed cancel");
               }
             }
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue, // Ganti dengan warna third
+            backgroundColor: Colors.blue,
             minimumSize: const Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),

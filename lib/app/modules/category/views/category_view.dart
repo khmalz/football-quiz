@@ -197,7 +197,7 @@ class CategoryView extends GetView<CategoryController> {
                                 artDialogArgs: ArtDialogArgs(
                                   type: ArtSweetAlertType.danger,
                                   title: "Oops...",
-                                  text: "The category still in development",
+                                  text: "The category is still in development",
                                 ),
                               );
                             }

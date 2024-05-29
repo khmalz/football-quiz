@@ -2,6 +2,7 @@
 
 // import 'dart:math';
 
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
 import 'package:football_quiz/app/routes/app_pages.dart';
@@ -44,21 +45,24 @@ class LevelView extends GetView<LevelController> {
           crossAxisSpacing: 16.0,
         ),
         itemBuilder: (context, index) {
-          bool isLocked = false;
+          bool isLocked = index > 0;
 
           return GestureDetector(
             onTap: () {
               if (!isLocked) {
-                if (index == 1) {
-                  Get.toNamed(Routes.QUIZ, parameters: {
-                    'level': index.toString(),
-                    'category': controller.category
-                  });
-                } else {
-                  // debugPrint("click");
-                }
+                Get.toNamed(Routes.QUIZ, parameters: {
+                  'level': index.toString(),
+                  'category': controller.category
+                });
               } else {
-                // Tampilkan pesan bahwa level masih terkunci
+                ArtSweetAlert.show(
+                  context: context,
+                  artDialogArgs: ArtDialogArgs(
+                    type: ArtSweetAlertType.danger,
+                    title: "Oops...",
+                    text: "This level is still in development",
+                  ),
+                );
               }
             },
             child: Container(

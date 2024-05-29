@@ -9,6 +9,7 @@ class QuizController extends GetxController {
   String category = Get.parameters['category'].toString();
 
   final RxList<Question> questions = <Question>[].obs;
+  RxInt totalQuestions = 0.obs;
 
   RxList<RxMap<String, dynamic>> answers = <RxMap<String, dynamic>>[].obs;
 
@@ -29,6 +30,7 @@ class QuizController extends GetxController {
       // debugPrint(models.toString());
 
       questions.value = models;
+      totalQuestions.value = models.length;
     }
   }
 
@@ -72,14 +74,13 @@ class QuizController extends GetxController {
     int correct = 0;
     int maxScore = 100;
 
-    int totalQuestions = questions.length;
-    double pointPerQuestion = maxScore / totalQuestions;
+    double pointPerQuestion = maxScore / totalQuestions.value;
 
-    while (answers.length < totalQuestions) {
+    while (answers.length < totalQuestions.value) {
       answers.add({'selectedAnswer': ""}.obs);
     }
 
-    for (var i = 0; i < totalQuestions; i++) {
+    for (var i = 0; i < totalQuestions.value; i++) {
       var userAnswer = answers[i]['selectedAnswer'];
       var correctAnswer = questions[i].answer;
 

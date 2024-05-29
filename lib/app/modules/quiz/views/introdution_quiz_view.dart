@@ -13,6 +13,7 @@ class IntrodutionQuizView extends GetView<QuizController> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: FutureBuilder(
@@ -20,7 +21,9 @@ class IntrodutionQuizView extends GetView<QuizController> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                backgroundColor: textSecondary,
+              ),
             );
           }
 
