@@ -53,7 +53,7 @@ class QuizView extends GetView<QuizController> {
               )) {
                 controller.calculateScore();
               } else {
-                debugPrint("pressed cancel");
+                // debugPrint("pressed cancel");
               }
             }
           },

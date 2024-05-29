@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RadioController extends GetxController {
@@ -8,7 +8,7 @@ class RadioController extends GetxController {
   late String select = gender[0];
 
   void onClickRadioButton(value) {
-    debugPrint(value);
+    // debugPrint(value);
     select = value;
     update();
   }

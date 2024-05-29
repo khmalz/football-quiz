@@ -26,7 +26,7 @@ class QuizController extends GetxController {
     var models = await questionProvider.getQuestion(category);
 
     if (models.isNotEmpty) {
-      debugPrint(models.toString());
+      // debugPrint(models.toString());
 
       questions.value = models;
     }
@@ -39,7 +39,7 @@ class QuizController extends GetxController {
       answers.add({'selectedAnswer': value}.obs);
     }
 
-    debugPrint(answers.toString());
+    // debugPrint(answers.toString());
   }
 
   void skipQuestion(int indexQuestion) {
@@ -49,7 +49,7 @@ class QuizController extends GetxController {
       answers.add({'selectedAnswer': ""}.obs);
     }
 
-    debugPrint(answers.toString());
+    // debugPrint(answers.toString());
   }
 
   RxInt currentIndex = 0.obs;

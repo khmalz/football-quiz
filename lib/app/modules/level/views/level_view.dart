@@ -55,7 +55,7 @@ class LevelView extends GetView<LevelController> {
                     'category': controller.category
                   });
                 } else {
-                  debugPrint("click");
+                  // debugPrint("click");
                 }
               } else {
                 // Tampilkan pesan bahwa level masih terkunci
