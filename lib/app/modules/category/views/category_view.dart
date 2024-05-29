@@ -1,3 +1,4 @@
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
@@ -110,12 +111,26 @@ class CategoryView extends GetView<CategoryController> {
                                       color: textSecondary,
                                       child: ListTile(
                                         onTap: () {
-                                          Get.toNamed(
-                                            Routes.LEVEL,
-                                            parameters: {
-                                              "category": category["league"]
-                                            },
-                                          );
+                                          if (category['league']
+                                              .toString()
+                                              .isNotEmpty) {
+                                            Get.toNamed(
+                                              Routes.LEVEL,
+                                              parameters: {
+                                                "category": category["league"]
+                                              },
+                                            );
+                                          } else {
+                                            ArtSweetAlert.show(
+                                              context: context,
+                                              artDialogArgs: ArtDialogArgs(
+                                                type: ArtSweetAlertType.danger,
+                                                title: "Oops...",
+                                                text:
+                                                    "The category still in development",
+                                              ),
+                                            );
+                                          }
                                         },
                                         contentPadding:
                                             const EdgeInsets.symmetric(
@@ -171,10 +186,21 @@ class CategoryView extends GetView<CategoryController> {
                         color: textSecondary,
                         child: ListTile(
                           onTap: () {
-                            Get.toNamed(
-                              Routes.LEVEL,
-                              parameters: {"category": category["league"]},
-                            );
+                            if (category['league'].toString().isNotEmpty) {
+                              Get.toNamed(
+                                Routes.LEVEL,
+                                parameters: {"category": category["league"]},
+                              );
+                            } else {
+                              ArtSweetAlert.show(
+                                context: context,
+                                artDialogArgs: ArtDialogArgs(
+                                  type: ArtSweetAlertType.danger,
+                                  title: "Oops...",
+                                  text: "The category still in development",
+                                ),
+                              );
+                            }
                           },
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),

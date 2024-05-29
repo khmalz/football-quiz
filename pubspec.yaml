@@ -11,6 +11,7 @@ dependencies:
   avatar_glow: 3.0.1
   font_awesome_flutter: 10.7.0
   confirm_dialog: 1.0.3
+  art_sweetalert: 0.0.5
   flutter: 
     sdk: flutter
 
