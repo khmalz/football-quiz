@@ -4,6 +4,8 @@ import '../modules/answer_review/bindings/answer_review_binding.dart';
 import '../modules/answer_review/views/answer_review_view.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
+import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/home_view.dart';
 import '../modules/level/bindings/level_binding.dart';
 import '../modules/level/views/level_view.dart';
 import '../modules/quiz/bindings/quiz_binding.dart';
@@ -16,9 +18,14 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.CATEGORY;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
+    GetPage(
+      name: _Paths.HOME,
+      page: () => const HomeView(),
+      binding: HomeBinding(),
+    ),
     GetPage(
       name: _Paths.QUIZ,
       page: () => const IntrodutionQuizView(),
