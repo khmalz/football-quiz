@@ -89,22 +89,79 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    minimumSize: const Size(150, 55),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                const SizedBox(height: 20),
+                Obx(
+                  () => Material(
+                    elevation: 5,
+                    shadowColor: textPrimary,
+                    borderRadius: BorderRadius.circular(15),
+                    child: TextField(
+                      obscureText: controller.isHidePassword.value,
+                      controller: controller.passwordLoginInput,
+                      textInputAction: TextInputAction.done,
+                      decoration: InputDecoration(
+                        suffixIcon: controller.isHidePassword.value
+                            ? IconButton(
+                                onPressed: () =>
+                                    controller.isHidePassword.value = false,
+                                icon: const Icon(Icons.visibility_off),
+                              )
+                            : IconButton(
+                                onPressed: () =>
+                                    controller.isHidePassword.value = true,
+                                icon: const Icon(Icons.visibility),
+                              ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: textSecondary,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        labelText: 'Password',
+                        labelStyle: TextStyle(
+                          color: controller.errorLoginPassword.value == null
+                              ? Colors.grey.shade600
+                              : Colors.red,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        errorText: controller.errorLoginPassword.value,
+                      ),
+                      keyboardType: TextInputType.name,
+                      onChanged: (value) => controller.validateLoginPassword(),
                     ),
                   ),
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(
+                ),
+                const SizedBox(height: 30),
+                Obx(
+                  () => ElevatedButton(
+                    onPressed:
+                        controller.isLoading.value ? null : controller.login,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      minimumSize: const Size(150, 55),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    child: Text(
+                      controller.isLoading.value ? 'Loading...' : 'Login',
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: textSecondary),
+                        color: textSecondary,
+                      ),
+                    ),
                   ),
                 )
               ],
@@ -121,6 +178,7 @@ class HomeView extends GetView<HomeController> {
                     borderRadius: BorderRadius.circular(15),
                     child: TextField(
                       controller: controller.usernameRegisInput,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 20),
@@ -193,22 +251,78 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    minimumSize: const Size(150, 55),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                const SizedBox(height: 15),
+                Obx(
+                  () => Material(
+                    elevation: 5,
+                    shadowColor: textPrimary,
+                    borderRadius: BorderRadius.circular(15),
+                    child: TextField(
+                      obscureText: controller.isHidePassword.value,
+                      controller: controller.passwordRegisInput,
+                      textInputAction: TextInputAction.done,
+                      decoration: InputDecoration(
+                        suffixIcon: controller.isHidePassword.value
+                            ? IconButton(
+                                onPressed: () =>
+                                    controller.isHidePassword.value = false,
+                                icon: const Icon(Icons.visibility_off),
+                              )
+                            : IconButton(
+                                onPressed: () =>
+                                    controller.isHidePassword.value = true,
+                                icon: const Icon(Icons.visibility),
+                              ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: textSecondary,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        labelText: 'Password',
+                        labelStyle: TextStyle(
+                          color: controller.errorRegisPassword.value == null
+                              ? Colors.grey.shade600
+                              : Colors.red,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        errorText: controller.errorRegisPassword.value,
+                      ),
+                      keyboardType: TextInputType.name,
+                      onChanged: (value) => controller.validateRegisPassword(),
                     ),
                   ),
-                  child: const Text(
-                    "Register",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: textSecondary,
+                ),
+                const SizedBox(height: 30),
+                Obx(
+                  () => ElevatedButton(
+                    onPressed:
+                        controller.isLoading.value ? null : controller.register,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      minimumSize: const Size(150, 55),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    child: Text(
+                      controller.isLoading.value ? 'Loading...' : 'Register',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: textSecondary,
+                      ),
                     ),
                   ),
                 )
