@@ -9,6 +9,7 @@ abstract class Routes {
   static const CATEGORY = _Paths.CATEGORY;
   static const LEVEL = _Paths.LEVEL;
   static const ANSWER_REVIEW = _Paths.ANSWER_REVIEW;
+  static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const CATEGORY = '/category';
   static const LEVEL = '/level';
   static const ANSWER_REVIEW = '/answer-review';
+  static const SPLASH_SCREEN = '/splash-screen';
 }

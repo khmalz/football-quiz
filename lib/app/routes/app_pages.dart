@@ -12,13 +12,15 @@ import '../modules/quiz/bindings/quiz_binding.dart';
 import '../modules/quiz/views/introdution_quiz_view.dart';
 import '../modules/score/bindings/score_binding.dart';
 import '../modules/score/views/score_view.dart';
+import '../modules/splash_screen/bindings/splash_screen_binding.dart';
+import '../modules/splash_screen/views/splash_screen_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH_SCREEN;
 
   static final routes = [
     GetPage(
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.ANSWER_REVIEW,
       page: () => const AnswerReviewView(),
       binding: AnswerReviewBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH_SCREEN,
+      page: () => const SplashScreenView(),
+      binding: SplashScreenBinding(),
     ),
   ];
 }
