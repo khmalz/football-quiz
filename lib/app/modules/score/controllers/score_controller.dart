@@ -35,6 +35,7 @@ class ScoreController extends GetxController {
   void toHome() {
     final box = GetStorage();
     box.remove('questionsCache');
+    box.remove('cache_$category');
 
     Get.offAllNamed(Routes.CATEGORY);
   }

@@ -11,6 +11,10 @@ class SplashScreenController extends GetxController {
 
   void checkUser() async {
     final box = GetStorage();
+    await box.remove('cache_championsleague');
+    await box.remove('cache_premierleague');
+    await box.remove('cache_laliga');
+    await box.remove('questionsCache');
 
     if (box.hasData('user')) {
       Get.offAllNamed(Routes.CATEGORY);
