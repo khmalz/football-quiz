@@ -1,23 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:football_quiz/app/data/helper/snackbar_notification.dart';
 import 'package:get/get.dart';
 
-import '../models/score_model.dart';
-
 class ScoreProvider extends GetConnect {
-  @override
-  void onInit() {
-    httpClient.defaultDecoder = (map) {
-      if (map is Map<String, dynamic>) return Score.fromJson(map);
-      if (map is List) return map.map((item) => Score.fromJson(item)).toList();
-    };
-    httpClient.baseUrl = 'YOUR-API-URL';
-  }
+  Future<Map<String, dynamic>?> postScore(
+      String userId, String category, int level, int point) async {
+    RxBool isEmpty = true.obs;
 
-  Future<Score?> getScore(int id) async {
-    final response = await get('score/$id');
-    return response.body;
-  }
+    do {
+      var response =
+          await post('https://football-quiz-api.vercel.app/api/score', {
+        'id': userId,
+        'category': category,
+        'level': level,
+        'score': point,
+      });
 
-  Future<Response<Score>> postScore(Score score) async =>
-      await post('score', score);
-  Future<Response> deleteScore(int id) async => await delete('score/$id');
+      if (response.body != null && response.statusCode == 201) {
+        debugPrint("EH SUCCESS: ${response.statusText}");
+        var result = response.body['data'] as Map<String, dynamic>;
+
+        isEmpty.value = false;
+        return result;
+      } else if (response.statusCode == 400) {
+        isEmpty.value = false;
+        snackbarNotification(message: "Bad your request");
+
+        return null;
+      } else if (response.statusCode == 406) {
+        isEmpty.value = false;
+        snackbarNotification(message: "Invalid level progression");
+
+        return null;
+      } else if (response.statusCode == 409) {
+        isEmpty.value = false;
+        snackbarNotification(message: "Invalid initial level");
+
+        return null;
+      } else {
+        debugPrint("EH ERRORRRR: ${response.statusText}");
+      }
+    } while (isEmpty.value);
+
+    return null;
+  }
 }

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../question_model.dart';
 
 class QuestionProvider extends GetConnect {
-  Future<List<Question>> getQuestion(String? category) async {
+  Future<List<Question>> getQuestion(String? category, String level) async {
     Response response;
     RxBool isEmpty = true.obs;
     var league = category ?? League.championsleague.name;
@@ -13,7 +13,7 @@ class QuestionProvider extends GetConnect {
     do {
       try {
         response = await get(
-          'https://football-quiz-api.vercel.app/api/questions/category/$league',
+          'https://football-quiz-api.vercel.app/api/questions/category/$league/level/$level',
         );
 
         if (response.body != null && response.statusCode == 200) {

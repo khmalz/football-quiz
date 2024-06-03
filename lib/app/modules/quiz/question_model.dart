@@ -2,13 +2,15 @@ class Question {
   String? question;
   List<String>? options;
   String? answer;
+  int? level;
 
-  Question({this.question, this.options, this.answer});
+  Question({this.question, this.options, this.answer, this.level});
 
   Question.fromJson(Map<String, dynamic> json) {
     question = json['question'];
     options = json['options']?.cast<String>();
     answer = json['answer'];
+    level = json['level'];
   }
 
   Map<String, dynamic> toJson() {
@@ -16,6 +18,7 @@ class Question {
     data['question'] = question;
     data['options'] = options;
     data['answer'] = answer;
+    data['level'] = level;
     return data;
   }
 
@@ -29,6 +32,7 @@ class Question {
       'question': question,
       'options': options,
       'answer': answer,
+      'level': level
     };
   }
 
@@ -39,10 +43,11 @@ class Question {
           ? List<String>.from((map['options'] as List<String>))
           : null,
       answer: map['answer'] != null ? map['answer'] as String : null,
+      level: map['level'] != null ? map['level'] as int : null,
     );
   }
 
   @override
   String toString() =>
-      'Question(question: $question, options: $options, answer: $answer)';
+      'Question(question: $question, options: $options, answer: $answer, level: $level)';
 }

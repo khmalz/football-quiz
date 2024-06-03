@@ -4,12 +4,16 @@ import 'package:football_quiz/app/modules/quiz/controllers/quiz_controller.dart'
 import 'package:football_quiz/app/modules/quiz/views/quiz_view.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class IntrodutionQuizView extends GetView<QuizController> {
   const IntrodutionQuizView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    final user = box.read('user');
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
@@ -50,13 +54,14 @@ class IntrodutionQuizView extends GetView<QuizController> {
           return Center(
             child: Stack(
               children: [
-                const Center(
+                Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Hello, Guest",
-                        style: TextStyle(fontSize: 30, color: textSecondary),
+                        "Hello, ${user['data']['name']}",
+                        style:
+                            const TextStyle(fontSize: 30, color: textSecondary),
                       ),
                     ],
                   ),

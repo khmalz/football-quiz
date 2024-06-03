@@ -25,10 +25,10 @@ class QuizController extends GetxController {
   }
 
   Future<void> getQuestions() async {
-    var models = await questionProvider.getQuestion(category);
+    var models = await questionProvider.getQuestion(category, level);
 
     if (models.isNotEmpty) {
-      // debugPrint(models.toString());
+      debugPrint(models.toString());
 
       questions.value = models;
       totalQuestions.value = models.length;

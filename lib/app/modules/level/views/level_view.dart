@@ -60,6 +60,7 @@ class LevelView extends GetView<LevelController> {
                 ),
                 itemBuilder: (context, index) {
                   bool isLocked = index > level["current_level"];
+                  bool isDevelopment = index >= 2;
 
                   return GestureDetector(
                     onTap: () {
@@ -67,6 +68,8 @@ class LevelView extends GetView<LevelController> {
                         if (index <= level["current_level"]) {
                           controller.isClickPlayLevelAgain.value = true;
                           controller.levelClickAgain.value = index;
+                        } else if (isDevelopment) {
+                          controller.isClickDevelopmentLevel.value = true;
                         } else {
                           Get.toNamed(Routes.QUIZ, parameters: {
                             'level': index.toString(),
@@ -122,56 +125,10 @@ class LevelView extends GetView<LevelController> {
               ),
               Obx(() {
                 if (controller.isClickLockLevel.value) {
-                  return GestureDetector(
-                    onTap: () => controller.isClickLockLevel.value = false,
-                    child: Stack(
-                      children: [
-                        // Latar belakang blur
-                        Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          color: Colors.black
-                              .withOpacity(0.5), // Gunakan warna transparan
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(
-                              sigmaX: 1.4,
-                              sigmaY: 1.4,
-                            ), // Efek blur
-                            child: Container(color: Colors.transparent),
-                          ),
-                        ),
-                        // Konten informasi level terkunci di tengah-tengah
-                        Positioned.fill(
-                          child: Center(
-                            child: Container(
-                              width: 200,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.lock,
-                                    size: 64,
-                                  ),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    "Level ini masih terkunci",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  return ModalWarning(
+                    controllerVal: controller.isClickLockLevel,
+                    message: "Level ini terkunci!",
+                    icon: Icons.lock,
                   );
                 } else {
                   return const SizedBox();
@@ -273,6 +230,17 @@ class LevelView extends GetView<LevelController> {
                 } else {
                   return const SizedBox();
                 }
+              }),
+              Obx(() {
+                if (controller.isClickDevelopmentLevel.value) {
+                  return ModalWarning(
+                    controllerVal: controller.isClickDevelopmentLevel,
+                    message: "Level ini masih dalam tahap pengembangan!",
+                    icon: Icons.miscellaneous_services,
+                  );
+                } else {
+                  return const SizedBox();
+                }
               })
             ]);
           } else {
@@ -281,6 +249,74 @@ class LevelView extends GetView<LevelController> {
             );
           }
         },
+      ),
+    );
+  }
+}
+
+class ModalWarning extends StatelessWidget {
+  const ModalWarning({
+    super.key,
+    required this.controllerVal,
+    required this.message,
+    required this.icon,
+  });
+
+  final RxBool controllerVal;
+  final String message;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => controllerVal.value = false,
+      child: Stack(
+        children: [
+          // Latar belakang blur
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: Colors.black.withOpacity(0.5), // Gunakan warna transparan
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 1.4,
+                sigmaY: 1.4,
+              ), // Efek blur
+              child: Container(color: Colors.transparent),
+            ),
+          ),
+          // Konten informasi level terkunci di tengah-tengah
+          Positioned.fill(
+            child: Center(
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      icon,
+                      size: 64,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      message,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

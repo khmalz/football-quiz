@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 
 class LevelController extends GetxController {
   RxBool isClickLockLevel = false.obs;
+  RxBool isClickDevelopmentLevel = false.obs;
   RxBool isClickPlayLevelAgain = false.obs;
   RxInt levelClickAgain = 0.obs;
 
@@ -13,7 +14,7 @@ class LevelController extends GetxController {
 
   Future<dynamic> getLevel() async {
     final box = GetStorage();
-    final userId = box.read('user');
+    final user = box.read('user');
 
     final categoryCacheKey = 'cache_$category';
     final cachedData = box.read(categoryCacheKey);
@@ -26,7 +27,7 @@ class LevelController extends GetxController {
       }
     }
 
-    final result = await levelProvider.getLevel(userId['data']['id'], category);
+    final result = await levelProvider.getLevel(user['data']['id'], category);
 
     final newExpiredTime =
         DateTime.now().add(const Duration(minutes: 10)).toIso8601String();
