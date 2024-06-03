@@ -51,6 +51,16 @@ class CategoryView extends GetView<CategoryController> {
                   elevation: 3,
                   color: textSecondary,
                   child: ListTile(
+                    onTap: () {
+                      ArtSweetAlert.show(
+                        context: context,
+                        artDialogArgs: ArtDialogArgs(
+                          type: ArtSweetAlertType.danger,
+                          title: "Oops...",
+                          text: "The game mode is still in development",
+                        ),
+                      );
+                    },
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     leading: const Icon(Icons.shuffle,

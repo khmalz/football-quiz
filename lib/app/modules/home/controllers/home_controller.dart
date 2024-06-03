@@ -91,12 +91,9 @@ class HomeController extends GetxController {
       var model = await userProvider.getUser(username, password);
 
       if (model != null) {
-        debugPrint(model.toString());
         await storeUserToStorage(model);
         Get.offAllNamed(Routes.CATEGORY);
-      } else {
-        debugPrint("Kosong");
-      }
+      } else {}
 
       isLoading.value = false;
     }
@@ -117,12 +114,9 @@ class HomeController extends GetxController {
       var model = await userProvider.addUser(username, name, password);
 
       if (model != null) {
-        debugPrint(model.toString());
         await storeUserToStorage(model);
         Get.offAllNamed(Routes.CATEGORY);
-      } else {
-        debugPrint("Kosong");
-      }
+      } else {}
 
       isLoading.value = false;
     }

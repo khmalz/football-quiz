@@ -8,7 +8,6 @@ class RadioController extends GetxController {
   late String select = gender[0];
 
   void onClickRadioButton(value) {
-    // debugPrint(value);
     select = value;
     update();
   }

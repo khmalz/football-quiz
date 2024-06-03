@@ -38,7 +38,7 @@ class UserProvider extends GetConnect {
           debugPrint("EH ERRORRRR: ${response.statusText}");
         }
       } catch (e) {
-        // debugPrint("Error: $e");
+        //
       }
 
       // Wait for 2 second before trying again
@@ -82,7 +82,7 @@ class UserProvider extends GetConnect {
           debugPrint("EH ERRORRRR: ${response.statusText}");
         }
       } catch (e) {
-        // debugPrint("Error: $e");
+        //
       }
 
       // Wait for 2 second before trying again

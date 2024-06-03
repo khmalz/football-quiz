@@ -330,7 +330,7 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
         ],
-        onChange: (index) => debugPrint("$index"),
+        onChange: (index) {},
       ),
     );
   }
