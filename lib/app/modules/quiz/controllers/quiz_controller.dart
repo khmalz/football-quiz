@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_quiz/app/data/helper/get_questions_from_cache.dart';
 import 'package:football_quiz/app/modules/quiz/providers/question_provider.dart';
 import 'package:football_quiz/app/modules/quiz/question_model.dart';
 import 'package:football_quiz/app/routes/app_pages.dart';
@@ -25,13 +26,20 @@ class QuizController extends GetxController {
   }
 
   Future<void> getQuestions() async {
-    var models = await questionProvider.getQuestion(category, level);
+    final box = GetStorage();
 
-    if (models.isNotEmpty) {
-      questions.value = models;
-      totalQuestions.value = models.length;
+    if (box.hasData('questionsCache')) {
+      questions.value = RxList<Question>(getQuestionsFromCache());
+      totalQuestions.value = questions.length;
+    } else {
+      var models = await questionProvider.getQuestion(category, level);
 
-      addQuestionToCache(models);
+      if (models.isNotEmpty) {
+        questions.value = models;
+        totalQuestions.value = models.length;
+
+        addQuestionToCache(models);
+      }
     }
   }
 
