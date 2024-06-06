@@ -17,9 +17,9 @@ class SplashScreenController extends GetxController {
     await box.remove('questionsCache');
 
     if (box.hasData('user')) {
-      Get.offAllNamed(Routes.CATEGORY);
-    } else {
       Get.offAllNamed(Routes.HOME);
+    } else {
+      Get.offAllNamed(Routes.AUTHENTICATION);
     }
   }
 }

@@ -2,12 +2,16 @@ import 'package:get/get.dart';
 
 import '../modules/answer_review/bindings/answer_review_binding.dart';
 import '../modules/answer_review/views/answer_review_view.dart';
+import '../modules/authentication/bindings/authentication_binding.dart';
+import '../modules/authentication/views/authentication_view.dart';
 import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/level/bindings/level_binding.dart';
 import '../modules/level/views/level_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 import '../modules/quiz/bindings/quiz_binding.dart';
 import '../modules/quiz/views/introdution_quiz_view.dart';
 import '../modules/score/bindings/score_binding.dart';
@@ -34,6 +38,11 @@ class AppPages {
       binding: QuizBinding(),
     ),
     GetPage(
+      name: _Paths.AUTHENTICATION,
+      page: () => const AuthenticationView(),
+      binding: AuthenticationBinding(),
+    ),
+    GetPage(
       name: _Paths.SCORE,
       page: () => const ScoreView(),
       binding: ScoreBinding(),
@@ -57,6 +66,11 @@ class AppPages {
       name: _Paths.SPLASH_SCREEN,
       page: () => const SplashScreenView(),
       binding: SplashScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

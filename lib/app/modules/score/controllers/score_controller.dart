@@ -66,6 +66,6 @@ class ScoreController extends GetxController {
     box.remove('questionsCache');
     box.remove('cache_$category');
 
-    Get.offAllNamed(Routes.CATEGORY);
+    Get.offAllNamed(Routes.HOME);
   }
 }
