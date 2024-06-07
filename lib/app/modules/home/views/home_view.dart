@@ -1,7 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
-import 'package:football_quiz/app/modules/category/controllers/category_controller.dart';
 import 'package:football_quiz/app/modules/category/views/category_view.dart';
 import 'package:football_quiz/app/modules/profile/views/profile_view.dart';
 
@@ -10,17 +9,18 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+  final int initialIndex;
+
+  const HomeView({super.key, this.initialIndex = 0});
 
   @override
   Widget build(BuildContext context) {
+    controller.setInitialIndex(initialIndex);
+
     var listPage = <Widget>[
       const CategoryView(),
       const ProfileView(),
     ];
-
-    // Inisiasi controller pertama kali
-    Get.lazyPut(() => CategoryController());
 
     return Scaffold(
       backgroundColor: lighterGray,

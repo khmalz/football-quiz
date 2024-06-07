@@ -91,4 +91,96 @@ class UserProvider extends GetConnect {
 
     return null;
   }
+
+  Future<User?> updateUser(String id, String username, String name) async {
+    Response response;
+    RxBool isEmpty = true.obs;
+
+    do {
+      try {
+        response = await put(
+          'https://football-quiz-api.vercel.app/api/users/edit',
+          {
+            "id": id,
+            'username': username,
+            "name": name,
+          },
+        );
+
+        if (response.statusCode == 201 && response.body != null) {
+          debugPrint("EH SUCCESS: ${response.statusText}");
+          isEmpty.value = false;
+
+          var result = response.body['data'] as Map<String, dynamic>;
+
+          return User.fromJson(result);
+        } else if (response.statusCode == 400) {
+          isEmpty.value = false;
+          snackbarNotification(message: "Bad your request");
+
+          return null;
+        } else if (response.statusCode == 404) {
+          isEmpty.value = false;
+          snackbarNotification(message: "User not found");
+
+          return null;
+        } else {
+          debugPrint("EH ERRORRRR: ${response.statusText}");
+        }
+      } catch (e) {
+        //
+      }
+    } while (isEmpty.value);
+
+    return null;
+  }
+
+  Future<User?> changePassword(
+      String id, String oldPassword, String newPassword) async {
+    Response response;
+    RxBool isEmpty = true.obs;
+
+    do {
+      try {
+        response = await put(
+          'https://football-quiz-api.vercel.app/api/users/changepassword',
+          {
+            "id": id,
+            'oldPassword': oldPassword,
+            "newPassword": newPassword,
+          },
+        );
+
+        if (response.statusCode == 201 && response.body != null) {
+          debugPrint("EH SUCCESS: ${response.statusText}");
+          isEmpty.value = false;
+
+          var result = response.body['data'] as Map<String, dynamic>;
+
+          return User.fromJson(result);
+        } else if (response.statusCode == 400) {
+          isEmpty.value = false;
+          snackbarNotification(message: "Bad your request");
+
+          return null;
+        } else if (response.statusCode == 401) {
+          isEmpty.value = false;
+          snackbarNotification(message: "Incorrect password");
+
+          return null;
+        } else if (response.statusCode == 404) {
+          isEmpty.value = false;
+          snackbarNotification(message: "User not found");
+
+          return null;
+        } else {
+          debugPrint("EH ERRORRRR: ${response.statusText}");
+        }
+      } catch (e) {
+        //
+      }
+    } while (isEmpty.value);
+
+    return null;
+  }
 }
