@@ -7,9 +7,12 @@ import 'package:football_quiz/app/data/models/user_model.dart';
 import 'package:football_quiz/app/data/providers/user_provider.dart';
 import 'package:football_quiz/app/modules/home/controllers/home_controller.dart';
 import 'package:football_quiz/app/modules/home/views/home_view.dart';
+import 'package:football_quiz/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProfileController extends GetxController {
+  RxBool isClickLogout = false.obs;
   RxBool isLoading = false.obs;
   UserProvider userProvider = UserProvider();
 
@@ -78,6 +81,7 @@ class ProfileController extends GetxController {
         snackbarNotification(
           message: 'Profile has been updated',
           backgroundColor: Colors.green,
+          duration: const Duration(seconds: 1, milliseconds: 500),
         );
       }
 
@@ -128,6 +132,7 @@ class ProfileController extends GetxController {
         snackbarNotification(
           message: 'Password changed successfully',
           backgroundColor: Colors.green,
+          duration: const Duration(seconds: 1, milliseconds: 500),
         );
       }
 
@@ -147,5 +152,14 @@ class ProfileController extends GetxController {
 
     errorPasswordOld.value = null;
     errorPasswordNew.value = null;
+  }
+
+  void logout() {
+    final box = GetStorage();
+
+    user.value = User();
+    box.erase();
+
+    Get.offAllNamed(Routes.AUTHENTICATION);
   }
 }

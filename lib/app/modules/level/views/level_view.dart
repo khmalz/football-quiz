@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
+import 'package:football_quiz/app/data/helper/modal.dart';
 import 'package:football_quiz/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
@@ -136,96 +135,19 @@ class LevelView extends GetView<LevelController> {
               }),
               Obx(() {
                 if (controller.isClickPlayLevelAgain.value) {
-                  return GestureDetector(
-                    onTap: () => controller.isClickPlayLevelAgain.value = false,
-                    child: Stack(
-                      children: [
-                        // Latar belakang blur
-                        Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          color: Colors.black
-                              .withOpacity(0.5), // Gunakan warna transparan
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(
-                              sigmaX: 1.4,
-                              sigmaY: 1.4,
-                            ), // Efek blur
-                            child: Container(color: Colors.transparent),
-                          ),
-                        ),
-                        // Konten informasi level terkunci di tengah-tengah
-                        Positioned.fill(
-                          child: Center(
-                            child: Container(
-                              width: 300,
-                              height: 300,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Icons.replay,
-                                    size: 64,
-                                  ),
-                                  const SizedBox(height: 20),
-                                  const Text(
-                                    "Apakah yakin untuk mengulang level ini?",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Get.toNamed(Routes.QUIZ, parameters: {
-                                            'level': controller.levelClickAgain
-                                                .toString(),
-                                            'category': controller.category
-                                          });
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Theme.of(context).primaryColor,
-                                          foregroundColor: textSecondary,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                        ),
-                                        child: const Text("IYA"),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          controller.isClickPlayLevelAgain
-                                              .value = false;
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                        ),
-                                        child: const Text("TIDAK"),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  return ModalConfirm(
+                    controllerVal: controller.isClickPlayLevelAgain,
+                    message: "Apakah yakin untuk mengulang level ini?",
+                    icon: Icons.restart_alt,
+                    onConfirm: () {
+                      Get.toNamed(Routes.QUIZ, parameters: {
+                        'level': controller.levelClickAgain.toString(),
+                        'category': controller.category
+                      });
+                    },
+                    onCancel: () {
+                      controller.isClickPlayLevelAgain.value = false;
+                    },
                   );
                 } else {
                   return const SizedBox();
@@ -249,74 +171,6 @@ class LevelView extends GetView<LevelController> {
             );
           }
         },
-      ),
-    );
-  }
-}
-
-class ModalWarning extends StatelessWidget {
-  const ModalWarning({
-    super.key,
-    required this.controllerVal,
-    required this.message,
-    required this.icon,
-  });
-
-  final RxBool controllerVal;
-  final String message;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => controllerVal.value = false,
-      child: Stack(
-        children: [
-          // Latar belakang blur
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.black.withOpacity(0.5), // Gunakan warna transparan
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 1.4,
-                sigmaY: 1.4,
-              ), // Efek blur
-              child: Container(color: Colors.transparent),
-            ),
-          ),
-          // Konten informasi level terkunci di tengah-tengah
-          Positioned.fill(
-            child: Center(
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      icon,
-                      size: 64,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      message,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

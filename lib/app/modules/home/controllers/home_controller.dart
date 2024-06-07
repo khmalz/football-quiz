@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:football_quiz/app/modules/category/controllers/category_controller.dart';
 import 'package:football_quiz/app/modules/profile/controllers/profile_controller.dart';
 import 'package:get/get.dart';
@@ -11,9 +12,9 @@ class HomeController extends GetxController {
   }
 
   void initController(int index) {
-    if (index == 0 && !Get.isRegistered<CategoryController>()) {
+    if (index == 0) {
       Get.lazyPut(() => CategoryController());
-    } else if (index == 1 && !Get.isRegistered<ProfileController>()) {
+    } else if (index == 1) {
       Get.lazyPut(() => ProfileController());
     }
   }
@@ -25,9 +26,9 @@ class HomeController extends GetxController {
       } else if (currentIndex.value == 1) {
         Get.delete<ProfileController>();
       }
-    }
 
-    initController(index);
+      initController(index);
+    }
 
     currentIndex.value = index;
   }

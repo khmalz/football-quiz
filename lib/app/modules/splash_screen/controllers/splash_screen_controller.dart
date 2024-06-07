@@ -16,7 +16,7 @@ class SplashScreenController extends GetxController {
     await box.remove('cache_laliga');
     await box.remove('questionsCache');
 
-    if (box.hasData('user')) {
+    if (box.hasData('user') && box.read('user')['data'] != null) {
       Get.offAllNamed(Routes.HOME);
     } else {
       Get.offAllNamed(Routes.AUTHENTICATION);
