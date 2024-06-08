@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
 import 'package:football_quiz/app/modules/quiz/controllers/quiz_controller.dart';
 import 'package:football_quiz/app/modules/quiz/views/quiz_view.dart';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -62,6 +61,14 @@ class IntrodutionQuizView extends GetView<QuizController> {
                         "Hello, ${user['data']['name']}",
                         style:
                             const TextStyle(fontSize: 30, color: textSecondary),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "You will be taking a quiz on ${controller.category} level ${controller.level}",
+                        style:
+                            const TextStyle(fontSize: 25, color: textSecondary),
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),

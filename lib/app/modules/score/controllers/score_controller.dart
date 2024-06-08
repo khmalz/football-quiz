@@ -61,6 +61,18 @@ class ScoreController extends GetxController {
     });
   }
 
+  void nextLevel() {
+    final box = GetStorage();
+    box.remove('questionsCache');
+
+    var nextLevel = int.parse(level) + 1;
+
+    Get.offAllNamed(Routes.QUIZ, parameters: {
+      'level': nextLevel.toString(),
+      'category': category,
+    });
+  }
+
   void toHome() {
     final box = GetStorage();
     box.remove('questionsCache');
