@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:football_quiz/app/modules/category/controllers/category_controller.dart';
 import 'package:football_quiz/app/modules/profile/controllers/profile_controller.dart';
 import 'package:get/get.dart';
