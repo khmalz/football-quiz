@@ -37,6 +37,10 @@ class ScoreProvider extends GetConnect {
         snackbarNotification(message: "Invalid initial level");
 
         return null;
+      } else if (response.statusCode == 422) {
+        isEmpty.value = false;
+
+        return {};
       } else {
         debugPrint("EH ERRORRRR: ${response.statusText}");
       }

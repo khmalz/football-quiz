@@ -9,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 class QuizController extends GetxController {
   String level = Get.parameters['level'].toString();
   String category = Get.parameters['category'].toString();
+  String isPlayAgain = Get.parameters['isPlayAgain'] ?? 'false';
 
   final RxList<Question> questions = <Question>[].obs;
   RxInt totalQuestions = 0.obs;
@@ -100,6 +101,7 @@ class QuizController extends GetxController {
     Get.offAllNamed(Routes.SCORE, arguments: {
       "level": level,
       "category": category,
+      "isPlayAgain": isPlayAgain,
       "answers": answers,
       "correct": correct,
       "wrong": wrong,

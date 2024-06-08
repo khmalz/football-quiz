@@ -53,24 +53,37 @@ class IntrodutionQuizView extends GetView<QuizController> {
           return Center(
             child: Stack(
               children: [
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Hello, ${user['data']['name']}",
-                        style:
-                            const TextStyle(fontSize: 30, color: textSecondary),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        "You will be taking a quiz on ${controller.category} level ${controller.level}",
-                        style:
-                            const TextStyle(fontSize: 25, color: textSecondary),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${controller.category} level ${controller.level}",
+                      style:
+                          const TextStyle(fontSize: 20, color: textSecondary),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Hello, ${user['data']['name']}",
+                          style: const TextStyle(
+                              fontSize: 30, color: textSecondary),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 20),
+                        const Text(
+                          "At least 50 points to unlock the next level",
+                          style: TextStyle(fontSize: 18, color: textSecondary),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Positioned(

@@ -72,7 +72,8 @@ class LevelView extends GetView<LevelController> {
                         } else {
                           Get.toNamed(Routes.QUIZ, parameters: {
                             'level': index.toString(),
-                            'category': controller.category
+                            'category': controller.category,
+                            'isPlayAgain': 'false'
                           });
                         }
                       } else {
@@ -142,7 +143,8 @@ class LevelView extends GetView<LevelController> {
                     onConfirm: () {
                       Get.toNamed(Routes.QUIZ, parameters: {
                         'level': controller.levelClickAgain.toString(),
-                        'category': controller.category
+                        'category': controller.category,
+                        'isPlayAgain': 'true'
                       });
                     },
                     onCancel: () {

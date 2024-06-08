@@ -202,7 +202,18 @@ class ScoreView extends GetView<ScoreController> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if (int.parse(controller.level) < 2) {
+                        if (controller.point < 50 &&
+                            controller.isPlayAgain.toString() == "false") {
+                          ArtSweetAlert.show(
+                            context: context,
+                            artDialogArgs: ArtDialogArgs(
+                              type: ArtSweetAlertType.warning,
+                              title: "Oops...",
+                              text:
+                                  "Your score not reached the minimum, please try again",
+                            ),
+                          );
+                        } else if (int.parse(controller.level) < 2) {
                           controller.nextLevel();
                         } else {
                           ArtSweetAlert.show(

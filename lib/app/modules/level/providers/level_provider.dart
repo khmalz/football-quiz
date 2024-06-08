@@ -19,10 +19,16 @@ class LevelProvider extends GetConnect {
           isEmpty.value = false;
 
           var result = response.body['data'] as Map<String, dynamic>;
+          var levelsData = result['levels'] as Map<String, dynamic>;
+
+          // Membuat map baru untuk hanya mengambil 'id' dan 'score'
+          var mappedLevels = levelsData.map((key, value) {
+            return MapEntry(key, value['score'] as int);
+          });
 
           var data = {
             "current_level": result['current_level'],
-            "level": Level.fromJson(result['level']),
+            "level": Level.fromJson(mappedLevels),
           };
 
           return data;

@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 
 class ScoreController extends GetxController {
   var category = Get.arguments["category"];
+  var isPlayAgain = Get.arguments["isPlayAgain"] ?? 'false';
   RxList<RxMap<String, dynamic>> answers =
       Get.arguments["answers"] as RxList<RxMap<String, dynamic>>;
   var correct = Get.arguments["correct"];
@@ -39,6 +40,8 @@ class ScoreController extends GetxController {
       snackbarNotification(
           message:
               "Please play again and if the problem persists, please report to us");
+    } else if (result.isNotEmpty && isPlayAgain.toString() == 'false') {
+      isPlayAgain = 'true';
     }
   }
 
