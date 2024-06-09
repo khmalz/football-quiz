@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
+import 'package:football_quiz/app/data/helper/get_initial_name.dart';
 import 'package:football_quiz/app/data/helper/get_random_color.dart';
 
 class CardLeaderboard extends StatelessWidget {
@@ -39,10 +40,12 @@ class CardLeaderboard extends StatelessWidget {
           CircleAvatar(
             backgroundColor: getRandomColor(),
             radius: 30,
-            child: Icon(
-              icon,
-              size: 30,
-              color: textSecondary,
+            child: Text(
+              getInitialName(name, 2),
+              style: const TextStyle(
+                color: textSecondary,
+                fontSize: 24,
+              ),
             ),
           ),
         ],

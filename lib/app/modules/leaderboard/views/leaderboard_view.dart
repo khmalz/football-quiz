@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/component/card_leaderboard.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
+import 'package:football_quiz/app/data/helper/get_initial_name.dart';
 import 'package:football_quiz/app/data/helper/get_random_color.dart';
 import 'package:get/get.dart';
 import '../controllers/leaderboard_controller.dart';
@@ -78,11 +79,16 @@ class LeaderboardView extends GetView<LeaderboardController> {
                                       const SizedBox(height: 10),
                                       CircleAvatar(
                                         backgroundColor: getRandomColor(),
-                                        radius: 45,
-                                        child: const Icon(
-                                          Icons.sports_soccer,
-                                          size: 45,
-                                          color: textSecondary,
+                                        radius: 30,
+                                        child: Text(
+                                          getInitialName(
+                                              topThree[0]['name'] ??
+                                                  "Player Name",
+                                              2),
+                                          style: const TextStyle(
+                                            color: textSecondary,
+                                            fontSize: 24,
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(height: 10),
@@ -131,11 +137,16 @@ class LeaderboardView extends GetView<LeaderboardController> {
                                       const SizedBox(height: 10),
                                       CircleAvatar(
                                         backgroundColor: getRandomColor(),
-                                        radius: 35,
-                                        child: const Icon(
-                                          Icons.sports_soccer,
-                                          size: 35,
-                                          color: textSecondary,
+                                        radius: 30,
+                                        child: Text(
+                                          getInitialName(
+                                              topThree[1]['name'] ??
+                                                  "Player Name",
+                                              2),
+                                          style: const TextStyle(
+                                            color: textSecondary,
+                                            fontSize: 24,
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(height: 10),
@@ -186,10 +197,15 @@ class LeaderboardView extends GetView<LeaderboardController> {
                                       CircleAvatar(
                                         backgroundColor: getRandomColor(),
                                         radius: 30,
-                                        child: const Icon(
-                                          Icons.sports_soccer,
-                                          size: 30,
-                                          color: textSecondary,
+                                        child: Text(
+                                          getInitialName(
+                                              topThree[2]['name'] ??
+                                                  "Player Name",
+                                              2),
+                                          style: const TextStyle(
+                                            color: textSecondary,
+                                            fontSize: 24,
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(height: 10),
