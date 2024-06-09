@@ -1,23 +1,18 @@
+import 'package:football_quiz/app/data/providers/score_provider.dart';
 import 'package:get/get.dart';
 
 class LeaderboardController extends GetxController {
-  //TODO: Implement LeaderboardController
+  ScoreProvider scoreProvider = ScoreProvider();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  String category = Get.arguments['category'].toString();
+
+  Future<List<Map<dynamic, dynamic>>?> getLeaderboard() async {
+    var responses = await scoreProvider.getAllScoreUser(category);
+
+    if (responses != null) {
+      return responses;
+    }
+
+    return null;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

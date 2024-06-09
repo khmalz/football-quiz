@@ -33,7 +33,12 @@ final List<Map<String, dynamic>> categories = [
     "color": Colors.black,
     "league": ""
   },
-  {"icon": FontAwesomeIcons.futbol, "title": "Ligue 1", "color": Colors.blue},
+  {
+    "icon": FontAwesomeIcons.futbol,
+    "title": "Ligue 1",
+    "color": Colors.blue,
+    "league": ""
+  },
   {
     "icon": FontAwesomeIcons.trophy,
     "title": "Europa League",
@@ -76,7 +81,12 @@ final List<Map<String, dynamic>> categories = [
     "color": Colors.lightBlue,
     "league": ""
   },
-  {"icon": FontAwesomeIcons.trophy, "title": "FA Cup", "color": Colors.red},
+  {
+    "icon": FontAwesomeIcons.trophy,
+    "title": "FA Cup",
+    "color": Colors.red,
+    "league": ""
+  },
   {
     "icon": FontAwesomeIcons.trophy,
     "title": "Copa del Rey",

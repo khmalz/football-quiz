@@ -12,7 +12,7 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   final int initialIndex;
 
-  const HomeView({super.key, this.initialIndex = 1});
+  const HomeView({super.key, this.initialIndex = 0});
 
   @override
   Widget build(BuildContext context) {

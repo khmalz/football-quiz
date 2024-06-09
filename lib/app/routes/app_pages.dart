@@ -1,3 +1,4 @@
+import 'package:football_quiz/app/modules/leaderboard/views/leaderboard_categories_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/answer_review/bindings/answer_review_binding.dart';
@@ -9,7 +10,6 @@ import '../modules/category/views/category_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/leaderboard/bindings/leaderboard_binding.dart';
-import '../modules/leaderboard/views/leaderboard_view.dart';
 import '../modules/level/bindings/level_binding.dart';
 import '../modules/level/views/level_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -76,7 +76,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LEADERBOARD,
-      page: () => const LeaderboardView(),
+      page: () => const LeaderboardCategoriesView(),
       binding: LeaderboardBinding(),
     ),
   ];

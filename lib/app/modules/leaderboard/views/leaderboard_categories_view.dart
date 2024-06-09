@@ -1,7 +1,9 @@
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:football_quiz/app/data/constant/categories.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
+import 'package:football_quiz/app/modules/leaderboard/bindings/leaderboard_binding.dart';
 import 'package:football_quiz/app/modules/leaderboard/views/leaderboard_view.dart';
 
 import 'package:get/get.dart';
@@ -73,7 +75,27 @@ class LeaderboardCategoriesView extends GetView<LeaderboardController> {
                                     color: textSecondary,
                                     child: ListTile(
                                       onTap: () {
-                                        Get.to(() => const LeaderboardView());
+                                        if (category['league']
+                                            .toString()
+                                            .isNotEmpty) {
+                                          Get.to(
+                                            () => const LeaderboardView(),
+                                            binding: LeaderboardBinding(),
+                                            arguments: {
+                                              'category': category['league']
+                                            },
+                                          );
+                                        } else {
+                                          ArtSweetAlert.show(
+                                            context: context,
+                                            artDialogArgs: ArtDialogArgs(
+                                              type: ArtSweetAlertType.danger,
+                                              title: "Oops...",
+                                              text:
+                                                  "The leaderboard for this category still in development",
+                                            ),
+                                          );
+                                        }
                                       },
                                       contentPadding:
                                           const EdgeInsets.symmetric(
@@ -129,7 +151,23 @@ class LeaderboardCategoriesView extends GetView<LeaderboardController> {
                       color: textSecondary,
                       child: ListTile(
                         onTap: () {
-                          Get.to(() => const LeaderboardView());
+                          if (category['league'].toString().isNotEmpty) {
+                            Get.to(
+                              () => const LeaderboardView(),
+                              binding: LeaderboardBinding(),
+                              arguments: {'category': category['league']},
+                            );
+                          } else {
+                            ArtSweetAlert.show(
+                              context: context,
+                              artDialogArgs: ArtDialogArgs(
+                                type: ArtSweetAlertType.danger,
+                                title: "Oops...",
+                                text:
+                                    "The leaderboard for this category still in development",
+                              ),
+                            );
+                          }
                         },
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
