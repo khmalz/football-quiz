@@ -279,16 +279,7 @@ class ScoreView extends GetView<ScoreController> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        ArtSweetAlert.show(
-                          context: context,
-                          artDialogArgs: ArtDialogArgs(
-                            type: ArtSweetAlertType.danger,
-                            title: "Oops...",
-                            text: "This feature is still in development",
-                          ),
-                        );
-                      },
+                      onTap: controller.toLeaderboard,
                       child: const Column(
                         children: [
                           CircleAvatar(

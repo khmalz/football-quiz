@@ -1,5 +1,7 @@
 import 'package:football_quiz/app/data/helper/snackbar_notification.dart';
 import 'package:football_quiz/app/data/providers/score_provider.dart';
+import 'package:football_quiz/app/modules/leaderboard/bindings/leaderboard_binding.dart';
+import 'package:football_quiz/app/modules/leaderboard/views/leaderboard_after_quiz_view.dart';
 import 'package:football_quiz/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -62,6 +64,17 @@ class ScoreController extends GetxController {
       'point': point,
       'total': total,
     });
+  }
+
+  void toLeaderboard() {
+    Get.to(
+      () => const LeaderboardAfterQuizView(),
+      arguments: {
+        'level': level,
+        'category': category,
+      },
+      binding: LeaderboardBinding(),
+    );
   }
 
   void nextLevel() {
