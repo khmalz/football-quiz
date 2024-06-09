@@ -1,81 +1,32 @@
-import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:football_quiz/app/data/constant/categories.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
-import 'package:football_quiz/app/routes/app_pages.dart';
+import 'package:football_quiz/app/modules/leaderboard/views/leaderboard_view.dart';
+
 import 'package:get/get.dart';
 
-import '../controllers/category_controller.dart';
+import '../controllers/leaderboard_controller.dart';
 
-class CategoryView extends GetView<CategoryController> {
-  const CategoryView({super.key});
+class LeaderboardCategoriesView extends GetView<LeaderboardController> {
+  const LeaderboardCategoriesView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lighterGray,
       appBar: AppBar(
-        title: Text('Football Quiz',
-            style: Theme.of(context)
-                .textTheme
-                .headlineMedium!
-                .copyWith(fontWeight: FontWeight.bold)),
+        title: Text(
+          'Leaderboard',
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium!
+              .copyWith(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
-        backgroundColor: lighterGray,
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         children: [
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              const Icon(
-                Icons.play_arrow,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                'Play Zone',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall!
-                    .copyWith(fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                elevation: 3,
-                color: textSecondary,
-                child: ListTile(
-                  onTap: () {
-                    ArtSweetAlert.show(
-                      context: context,
-                      artDialogArgs: ArtDialogArgs(
-                        type: ArtSweetAlertType.danger,
-                        title: "Oops...",
-                        text: "The game mode is still in development",
-                      ),
-                    );
-                  },
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  leading: const Icon(Icons.shuffle,
-                      color: Colors.deepOrange, size: 35),
-                  title: Text("Random Quiz",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(fontSize: 22)),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -122,26 +73,7 @@ class CategoryView extends GetView<CategoryController> {
                                     color: textSecondary,
                                     child: ListTile(
                                       onTap: () {
-                                        if (category['league']
-                                            .toString()
-                                            .isNotEmpty) {
-                                          Get.toNamed(
-                                            Routes.LEVEL,
-                                            parameters: {
-                                              "category": category["league"]
-                                            },
-                                          );
-                                        } else {
-                                          ArtSweetAlert.show(
-                                            context: context,
-                                            artDialogArgs: ArtDialogArgs(
-                                              type: ArtSweetAlertType.danger,
-                                              title: "Oops...",
-                                              text:
-                                                  "The category still in development",
-                                            ),
-                                          );
-                                        }
+                                        Get.to(() => const LeaderboardView());
                                       },
                                       contentPadding:
                                           const EdgeInsets.symmetric(
@@ -186,7 +118,7 @@ class CategoryView extends GetView<CategoryController> {
               )
             ],
           ),
-          ...categories.take(6).map(
+          ...categories.take(7).map(
                 (category) => Column(
                   children: [
                     Card(
@@ -197,21 +129,7 @@ class CategoryView extends GetView<CategoryController> {
                       color: textSecondary,
                       child: ListTile(
                         onTap: () {
-                          if (category['league'].toString().isNotEmpty) {
-                            Get.toNamed(
-                              Routes.LEVEL,
-                              parameters: {"category": category["league"]},
-                            );
-                          } else {
-                            ArtSweetAlert.show(
-                              context: context,
-                              artDialogArgs: ArtDialogArgs(
-                                type: ArtSweetAlertType.danger,
-                                title: "Oops...",
-                                text: "The category is still in development",
-                              ),
-                            );
-                          }
+                          Get.to(() => const LeaderboardView());
                         },
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),

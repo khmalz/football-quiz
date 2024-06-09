@@ -1,4 +1,5 @@
 import 'package:football_quiz/app/modules/category/controllers/category_controller.dart';
+import 'package:football_quiz/app/modules/leaderboard/controllers/leaderboard_controller.dart';
 import 'package:football_quiz/app/modules/profile/controllers/profile_controller.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,8 @@ class HomeController extends GetxController {
     if (index == 0) {
       Get.lazyPut(() => CategoryController());
     } else if (index == 1) {
+      Get.lazyPut(() => LeaderboardController());
+    } else if (index == 2) {
       Get.lazyPut(() => ProfileController());
     }
   }
@@ -23,9 +26,10 @@ class HomeController extends GetxController {
       if (currentIndex.value == 0) {
         Get.delete<CategoryController>();
       } else if (currentIndex.value == 1) {
+        Get.delete<LeaderboardController>();
+      } else if (currentIndex.value == 2) {
         Get.delete<ProfileController>();
       }
-
       initController(index);
     }
 

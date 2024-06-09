@@ -8,6 +8,8 @@ import '../modules/category/bindings/category_binding.dart';
 import '../modules/category/views/category_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/leaderboard/bindings/leaderboard_binding.dart';
+import '../modules/leaderboard/views/leaderboard_view.dart';
 import '../modules/level/bindings/level_binding.dart';
 import '../modules/level/views/level_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.LEADERBOARD,
+      page: () => const LeaderboardView(),
+      binding: LeaderboardBinding(),
     ),
   ];
 }

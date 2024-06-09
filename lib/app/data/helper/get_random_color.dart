@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-Color getRandomLightColor() {
+Color getRandomColor() {
   Random random = Random();
   int min = 20;
   int r = min + random.nextInt(256 - min);

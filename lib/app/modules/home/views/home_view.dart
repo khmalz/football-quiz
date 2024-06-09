@@ -2,6 +2,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:football_quiz/app/data/constant/color.dart';
 import 'package:football_quiz/app/modules/category/views/category_view.dart';
+import 'package:football_quiz/app/modules/leaderboard/views/leaderboard_categories_view.dart';
 import 'package:football_quiz/app/modules/profile/views/profile_view.dart';
 
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   final int initialIndex;
 
-  const HomeView({super.key, this.initialIndex = 0});
+  const HomeView({super.key, this.initialIndex = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class HomeView extends GetView<HomeController> {
 
     var listPage = <Widget>[
       const CategoryView(),
+      const LeaderboardCategoriesView(),
       const ProfileView(),
     ];
 
@@ -38,6 +40,7 @@ class HomeView extends GetView<HomeController> {
       bottomNavigationBar: ConvexAppBar(
         items: const [
           TabItem(icon: Icons.home, title: 'Home'),
+          TabItem(icon: Icons.leaderboard, title: 'Leaderboard'),
           TabItem(icon: Icons.account_circle, title: 'Profile'),
         ],
         initialActiveIndex: controller.currentIndex.value,

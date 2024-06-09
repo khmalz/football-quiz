@@ -32,7 +32,7 @@ class ProfileView extends GetView<ProfileController> {
                 child: ListTile(
                   onTap: () => Get.to(() => const ProfileEditView()),
                   leading: CircleAvatar(
-                    backgroundColor: getRandomLightColor(),
+                    backgroundColor: getRandomColor(),
                     radius: 30,
                     child: Obx(() {
                       return Text(

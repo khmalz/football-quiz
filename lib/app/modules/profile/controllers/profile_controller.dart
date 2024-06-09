@@ -75,7 +75,7 @@ class ProfileController extends GetxController {
         clearInput();
         user = getUserFromStorage().obs;
 
-        Get.offAll(() => const HomeView(initialIndex: 1));
+        Get.offAll(() => const HomeView(initialIndex: 2));
         Get.lazyPut<HomeController>(() => HomeController());
 
         snackbarNotification(
@@ -126,7 +126,7 @@ class ProfileController extends GetxController {
         clearInput();
         user = getUserFromStorage().obs;
 
-        Get.offAll(() => const HomeView(initialIndex: 1));
+        Get.offAll(() => const HomeView(initialIndex: 2));
         Get.lazyPut<HomeController>(() => HomeController());
 
         snackbarNotification(
