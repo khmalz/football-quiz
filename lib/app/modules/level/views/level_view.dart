@@ -25,7 +25,7 @@ class LevelView extends GetView<LevelController> {
               )
             : null,
         title: Text(
-          'Pilih Level',
+          'Select Level',
           style: Theme.of(context)
               .textTheme
               .headlineMedium!
@@ -51,7 +51,7 @@ class LevelView extends GetView<LevelController> {
             return Stack(children: [
               GridView.builder(
                 padding: const EdgeInsets.all(20),
-                itemCount: 9, // Ubah angka ini sesuai dengan jumlah level
+                itemCount: 5, // Ubah angka ini sesuai dengan jumlah level
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 16.0,
@@ -59,7 +59,7 @@ class LevelView extends GetView<LevelController> {
                 ),
                 itemBuilder: (context, index) {
                   bool isLocked = index > level["current_level"];
-                  bool isDevelopment = index >= 2;
+                  bool isDevelopment = index >= 5;
 
                   return GestureDetector(
                     onTap: () {
