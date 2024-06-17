@@ -27,55 +27,55 @@ class CategoryView extends GetView<CategoryController> {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         children: [
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              const Icon(
-                Icons.play_arrow,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                'Play Zone',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall!
-                    .copyWith(fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                elevation: 3,
-                color: textSecondary,
-                child: ListTile(
-                  onTap: () {
-                    ArtSweetAlert.show(
-                      context: context,
-                      artDialogArgs: ArtDialogArgs(
-                        type: ArtSweetAlertType.danger,
-                        title: "Oops...",
-                        text: "The game mode is still in development",
-                      ),
-                    );
-                  },
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  leading: const Icon(Icons.shuffle,
-                      color: Colors.deepOrange, size: 35),
-                  title: Text("Random Quiz",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(fontSize: 22)),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
+          // Wrap(
+          //   crossAxisAlignment: WrapCrossAlignment.center,
+          //   children: [
+          //     const Icon(
+          //       Icons.play_arrow,
+          //     ),
+          //     const SizedBox(width: 10),
+          //     Text(
+          //       'Play Zone',
+          //       style: Theme.of(context)
+          //           .textTheme
+          //           .headlineSmall!
+          //           .copyWith(fontWeight: FontWeight.w500),
+          //     ),
+          //   ],
+          // ),
+          // Column(
+          //   children: [
+          //     Card(
+          //       shape: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.circular(10),
+          //       ),
+          //       elevation: 3,
+          //       color: textSecondary,
+          //       child: ListTile(
+          //         onTap: () {
+          //           ArtSweetAlert.show(
+          //             context: context,
+          //             artDialogArgs: ArtDialogArgs(
+          //               type: ArtSweetAlertType.danger,
+          //               title: "Oops...",
+          //               text: "The game mode is still in development",
+          //             ),
+          //           );
+          //         },
+          //         contentPadding:
+          //             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          //         leading: const Icon(Icons.shuffle,
+          //             color: Colors.deepOrange, size: 35),
+          //         title: Text("Random Quiz",
+          //             style: Theme.of(context)
+          //                 .textTheme
+          //                 .titleMedium!
+          //                 .copyWith(fontSize: 22)),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -186,7 +186,7 @@ class CategoryView extends GetView<CategoryController> {
               )
             ],
           ),
-          ...categories.take(6).map(
+          ...categories.take(7).map(
                 (category) => Column(
                   children: [
                     Card(
